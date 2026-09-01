@@ -1,0 +1,725 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Syed Nazr-e-Abbas — Software Engineering Student</title>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;1,9..40,300&family=DM+Serif+Display:ital@0;1&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --white: #ffffff;
+    --off: #f7f7f5;
+    --ink: #111110;
+    --mid: #6b6b67;
+    --light: #d4d4cf;
+    --accent: #1a4fa0;
+    --accent-soft: #e8eef8;
+    --accent-mid: #3366cc;
+    --green: #1a6640;
+    --green-soft: #e6f2ec;
+    --radius: 12px;
+    --sans: 'DM Sans', system-ui, sans-serif;
+    --serif: 'DM Serif Display', Georgia, serif;
+  }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: var(--sans);
+    background: var(--white);
+    color: var(--ink);
+    font-size: 16px;
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  /* NAV */
+  nav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+    background: rgba(255,255,255,0.92);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid var(--light);
+    padding: 0 2rem;
+    display: flex; align-items: center; justify-content: space-between;
+    height: 60px;
+  }
+  .nav-name {
+    font-family: var(--serif);
+    font-size: 1.1rem;
+    color: var(--ink);
+    text-decoration: none;
+    letter-spacing: -0.01em;
+  }
+  .nav-links { display: flex; gap: 2rem; list-style: none; }
+  .nav-links a {
+    font-size: 0.875rem;
+    font-weight: 500;
+    color: var(--mid);
+    text-decoration: none;
+    transition: color 0.2s;
+  }
+  .nav-links a:hover { color: var(--accent); }
+
+  /* HERO */
+  .hero {
+    min-height: 100vh;
+    display: flex; flex-direction: column; justify-content: center;
+    padding: 80px 2rem 4rem;
+    max-width: 900px; margin: 0 auto;
+  }
+  .hero-tag {
+    display: inline-flex; align-items: center; gap: 8px;
+    background: var(--accent-soft);
+    color: var(--accent);
+    font-size: 0.8rem; font-weight: 600;
+    padding: 6px 14px; border-radius: 100px;
+    margin-bottom: 2rem;
+    width: fit-content;
+    letter-spacing: 0.02em;
+  }
+  .hero-tag::before {
+    content: '';
+    width: 7px; height: 7px;
+    background: var(--accent);
+    border-radius: 50%;
+    animation: pulse 2s ease-in-out infinite;
+  }
+  @keyframes pulse {
+    0%, 100% { opacity: 1; transform: scale(1); }
+    50% { opacity: 0.5; transform: scale(0.8); }
+  }
+  .hero h1 {
+    font-family: var(--serif);
+    font-size: clamp(2.8rem, 7vw, 5rem);
+    line-height: 1.08;
+    letter-spacing: -0.03em;
+    color: var(--ink);
+    margin-bottom: 1.5rem;
+    max-width: 14ch;
+  }
+  .hero h1 em {
+    font-style: italic;
+    color: var(--accent);
+  }
+  .hero-sub {
+    font-size: 1.1rem;
+    color: var(--mid);
+    max-width: 52ch;
+    line-height: 1.7;
+    margin-bottom: 2.5rem;
+    font-weight: 300;
+  }
+  .hero-actions { display: flex; gap: 1rem; flex-wrap: wrap; }
+  .btn-primary {
+    background: var(--accent);
+    color: white;
+    padding: 12px 28px;
+    border-radius: 100px;
+    font-size: 0.9rem; font-weight: 600;
+    text-decoration: none;
+    transition: background 0.2s, transform 0.15s;
+    display: inline-flex; align-items: center; gap: 8px;
+  }
+  .btn-primary:hover { background: var(--accent-mid); transform: translateY(-1px); }
+  .btn-secondary {
+    background: transparent;
+    color: var(--ink);
+    padding: 12px 28px;
+    border-radius: 100px;
+    border: 1.5px solid var(--light);
+    font-size: 0.9rem; font-weight: 500;
+    text-decoration: none;
+    transition: border-color 0.2s, transform 0.15s;
+  }
+  .btn-secondary:hover { border-color: var(--accent); color: var(--accent); transform: translateY(-1px); }
+
+  .hero-stats {
+    display: flex; gap: 3rem; margin-top: 4rem;
+    padding-top: 2rem;
+    border-top: 1px solid var(--light);
+    flex-wrap: wrap;
+  }
+  .stat-num {
+    font-family: var(--serif);
+    font-size: 2rem;
+    color: var(--ink);
+    line-height: 1;
+    margin-bottom: 4px;
+  }
+  .stat-label { font-size: 0.8rem; color: var(--mid); font-weight: 400; }
+
+  /* SECTIONS */
+  section { padding: 5rem 2rem; }
+  .container { max-width: 900px; margin: 0 auto; }
+  .section-label {
+    font-size: 0.75rem;
+    font-weight: 600;
+    color: var(--accent);
+    letter-spacing: 0.08em;
+    margin-bottom: 1rem;
+    text-transform: uppercase;
+  }
+  .section-title {
+    font-family: var(--serif);
+    font-size: clamp(1.8rem, 4vw, 2.6rem);
+    letter-spacing: -0.02em;
+    line-height: 1.15;
+    color: var(--ink);
+    margin-bottom: 1rem;
+  }
+  .section-sub {
+    font-size: 1rem;
+    color: var(--mid);
+    max-width: 52ch;
+    line-height: 1.7;
+    margin-bottom: 3rem;
+    font-weight: 300;
+  }
+
+  /* ABOUT */
+  .about-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 3rem;
+    align-items: start;
+  }
+  .about-text p {
+    color: var(--mid);
+    line-height: 1.8;
+    font-size: 0.975rem;
+    margin-bottom: 1rem;
+    font-weight: 300;
+  }
+  .about-text p strong { color: var(--ink); font-weight: 600; }
+  .about-details { display: flex; flex-direction: column; gap: 1rem; }
+  .detail-item {
+    background: var(--off);
+    border-radius: var(--radius);
+    padding: 1.25rem 1.5rem;
+  }
+  .detail-item-label { font-size: 0.75rem; color: var(--mid); font-weight: 500; margin-bottom: 4px; }
+  .detail-item-value { font-size: 0.9rem; color: var(--ink); font-weight: 500; }
+
+  /* SKILLS */
+  .skills-bg { background: var(--off); }
+  .skills-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 1rem;
+  }
+  .skill-card {
+    background: var(--white);
+    border-radius: var(--radius);
+    padding: 1.5rem;
+    border: 1px solid transparent;
+    transition: border-color 0.2s;
+  }
+  .skill-card:hover { border-color: var(--accent); }
+  .skill-icon { font-size: 1.5rem; margin-bottom: 0.75rem; }
+  .skill-name { font-size: 0.95rem; font-weight: 600; color: var(--ink); margin-bottom: 6px; }
+  .skill-desc { font-size: 0.8rem; color: var(--mid); line-height: 1.5; }
+
+  /* PROJECTS */
+  .projects-grid { display: flex; flex-direction: column; gap: 1.5rem; }
+  .project-card {
+    background: var(--white);
+    border: 1px solid var(--light);
+    border-radius: var(--radius);
+    padding: 2rem;
+    display: grid;
+    grid-template-columns: 1fr auto;
+    gap: 1rem;
+    align-items: start;
+    transition: border-color 0.2s, box-shadow 0.2s;
+  }
+  .project-card:hover {
+    border-color: var(--accent);
+    box-shadow: 0 4px 20px rgba(26,79,160,0.08);
+  }
+  .project-tag {
+    display: inline-flex;
+    background: var(--accent-soft);
+    color: var(--accent);
+    font-size: 0.72rem; font-weight: 600;
+    padding: 4px 10px; border-radius: 100px;
+    margin-bottom: 0.75rem;
+    width: fit-content;
+  }
+  .project-name {
+    font-family: var(--serif);
+    font-size: 1.25rem;
+    color: var(--ink);
+    margin-bottom: 0.5rem;
+    letter-spacing: -0.01em;
+  }
+  .project-desc { font-size: 0.875rem; color: var(--mid); line-height: 1.7; font-weight: 300; }
+  .project-techs {
+    display: flex; flex-wrap: wrap; gap: 6px; margin-top: 1rem;
+  }
+  .tech-pill {
+    font-size: 0.72rem; font-weight: 500;
+    background: var(--off); color: var(--mid);
+    padding: 4px 10px; border-radius: 100px;
+    border: 1px solid var(--light);
+  }
+  .project-num {
+    font-family: var(--serif);
+    font-size: 2.5rem;
+    color: var(--light);
+    line-height: 1;
+    font-style: italic;
+  }
+
+  /* INTERNSHIPS */
+  .internships-bg { background: var(--off); }
+  .timeline { display: flex; flex-direction: column; gap: 1.5rem; }
+  .timeline-item {
+    background: var(--white);
+    border-radius: var(--radius);
+    padding: 1.75rem 2rem;
+    display: grid;
+    grid-template-columns: auto 1fr;
+    gap: 1.5rem;
+    align-items: start;
+  }
+  .timeline-dot {
+    width: 40px; height: 40px;
+    background: var(--accent-soft);
+    border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 1.1rem;
+    margin-top: 4px;
+    flex-shrink: 0;
+  }
+  .timeline-company { font-weight: 600; font-size: 1rem; color: var(--ink); margin-bottom: 2px; }
+  .timeline-role { font-size: 0.875rem; color: var(--accent); font-weight: 500; margin-bottom: 4px; }
+  .timeline-date { font-size: 0.8rem; color: var(--mid); margin-bottom: 0.75rem; }
+  .timeline-desc { font-size: 0.875rem; color: var(--mid); line-height: 1.7; font-weight: 300; }
+
+  /* CERTIFICATIONS */
+  .certs-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 1rem;
+  }
+  .cert-card {
+    background: var(--white);
+    border: 1px solid var(--light);
+    border-radius: var(--radius);
+    padding: 1.5rem;
+    transition: border-color 0.2s;
+  }
+  .cert-card:hover { border-color: var(--accent); }
+  .cert-icon { font-size: 1.5rem; margin-bottom: 0.75rem; }
+  .cert-name { font-size: 0.9rem; font-weight: 600; color: var(--ink); margin-bottom: 4px; line-height: 1.4; }
+  .cert-date { font-size: 0.78rem; color: var(--mid); }
+
+  /* CONTACT */
+  .contact-bg { background: var(--ink); }
+  .contact-bg .section-label { color: var(--accent-soft); }
+  .contact-bg .section-title { color: var(--white); }
+  .contact-bg .section-sub { color: rgba(255,255,255,0.5); }
+  .contact-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 1rem;
+    margin-top: 2rem;
+  }
+  .contact-card {
+    background: rgba(255,255,255,0.06);
+    border: 1px solid rgba(255,255,255,0.1);
+    border-radius: var(--radius);
+    padding: 1.5rem;
+    text-decoration: none;
+    transition: background 0.2s, border-color 0.2s;
+  }
+  .contact-card:hover {
+    background: rgba(255,255,255,0.1);
+    border-color: rgba(255,255,255,0.25);
+  }
+  .contact-card-icon { font-size: 1.25rem; margin-bottom: 0.75rem; }
+  .contact-card-label { font-size: 0.75rem; color: rgba(255,255,255,0.45); font-weight: 500; margin-bottom: 4px; }
+  .contact-card-value { font-size: 0.875rem; color: var(--white); font-weight: 500; }
+
+  /* CV DOWNLOAD */
+  .cv-strip {
+    background: var(--accent-soft);
+    border-top: 1px solid rgba(26,79,160,0.15);
+    padding: 1.5rem 2rem;
+    display: flex; align-items: center; justify-content: space-between;
+    flex-wrap: wrap; gap: 1rem;
+  }
+  .cv-strip-text { font-size: 0.9rem; color: var(--accent); font-weight: 500; }
+  .cv-strip-btn {
+    background: var(--accent);
+    color: white;
+    padding: 10px 24px;
+    border-radius: 100px;
+    font-size: 0.85rem; font-weight: 600;
+    text-decoration: none;
+    transition: background 0.2s;
+  }
+  .cv-strip-btn:hover { background: var(--accent-mid); }
+
+  /* FOOTER */
+  footer {
+    background: var(--ink);
+    border-top: 1px solid rgba(255,255,255,0.08);
+    padding: 1.5rem 2rem;
+    text-align: center;
+  }
+  footer p { font-size: 0.8rem; color: rgba(255,255,255,0.3); }
+
+  /* RESPONSIVE */
+  @media (max-width: 680px) {
+    .about-grid { grid-template-columns: 1fr; }
+    .nav-links { display: none; }
+    .hero-stats { gap: 2rem; }
+    .project-card { grid-template-columns: 1fr; }
+    .project-num { display: none; }
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <a href="#hero" class="nav-name">Syed Nazr-e-Abbas</a>
+  <ul class="nav-links">
+    <li><a href="#about">About</a></li>
+    <li><a href="#skills">Skills</a></li>
+    <li><a href="#projects">Projects</a></li>
+    <li><a href="#experience">Experience</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<section id="hero">
+  <div class="hero">
+    <div class="hero-tag">Open to Remote Internships</div>
+    <h1>Building software that <em>actually works.</em></h1>
+    <p class="hero-sub">Software Engineering student at COMSATS University Islamabad — focused on Web Development, Python and SQL. Six projects shipped, one internship completed, and still going.</p>
+    <div class="hero-actions">
+      <a href="#projects" class="btn-primary">View my projects</a>
+      <a href="#contact" class="btn-secondary">Get in touch</a>
+    </div>
+    <div class="hero-stats">
+      <div>
+        <div class="stat-num">6</div>
+        <div class="stat-label">Projects built</div>
+      </div>
+      <div>
+        
+        
+      </div>
+      <div>
+        <div class="stat-num">3.1</div>
+        <div class="stat-label">CGPA out of 4.0</div>
+      </div>
+      <div>
+        <div class="stat-num">3rd</div>
+        <div class="stat-label">Year of degree</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ABOUT -->
+<section id="about">
+  <div class="container">
+    <div class="section-label">About me</div>
+    <h2 class="section-title">The person behind the code</h2>
+    <div class="about-grid">
+      <div class="about-text">
+        <p>I am a second-year BS Software Engineering student at COMSATS University Islamabad, Attock Campus. I have built projects across Java, Python, SQL, Blockchain and AI — not because I had to, but because I wanted to understand how things actually work.</p>
+        <p>My interests sit where <strong>technology meets people</strong> — I enjoy thinking about how software is designed, how teams build things together, and how quality is maintained at every step. I am drawn toward roles in web development, QA engineering, and product thinking.</p>
+        <p>Outside of tech I am a <strong>robotics enthusiast, photographer, and a tinkerer</strong> — the kind of person who takes apart electronics just to see what is inside. I also do most of my own car maintenance at home, which honestly teaches the same skills: patience, systems thinking, and not giving up when things break.</p>
+      </div>
+      <div class="about-details">
+        <div class="detail-item">
+          <div class="detail-item-label">University</div>
+          <div class="detail-item-value">COMSATS University Islamabad, Attock</div>
+        </div>
+        <div class="detail-item">
+          <div class="detail-item-label">Degree</div>
+          <div class="detail-item-value">BS Software Engineering (2024 – 2028)</div>
+        </div>
+        <div class="detail-item">
+          <div class="detail-item-label">CGPA</div>
+          <div class="detail-item-value">3.1 / 4.0</div>
+        </div>
+        <div class="detail-item">
+          <div class="detail-item-label">Location</div>
+          <div class="detail-item-value">Attock, Pakistan — Open to remote work</div>
+        </div>
+        <div class="detail-item">
+          <div class="detail-item-label">Languages</div>
+          <div class="detail-item-value">Urdu · Punjabi · English · Arabic (basic)</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SKILLS -->
+<section id="skills" class="skills-bg">
+  <div class="container">
+    <div class="section-label">What I work with</div>
+    <h2 class="section-title">Skills & technologies</h2>
+    <p class="section-sub">A mix of languages, tools and concepts I have used in real projects — not just studied.</p>
+    <div class="skills-grid">
+      <div class="skill-card">
+        <div class="skill-icon">☕</div>
+        <div class="skill-name">Java</div>
+        <div class="skill-desc">MVC architecture, data structures, OOP, inventory systems, student management</div>
+      </div>
+      <div class="skill-card">
+        <div class="skill-icon">🐍</div>
+        <div class="skill-name">Python</div>
+        <div class="skill-desc">Blockchain systems, quiz platforms, file handling with JSON, unit testing</div>
+      </div>
+      <div class="skill-card">
+        <div class="skill-icon">🗄️</div>
+        <div class="skill-name">SQL</div>
+        <div class="skill-desc">Database design, CRUD operations, hospital management systems, normalization</div>
+      </div>
+      <div class="skill-card">
+        <div class="skill-icon">🌐</div>
+        <div class="skill-name">HTML & CSS</div>
+        <div class="skill-desc">Web fundamentals, responsive design — currently advancing through freeCodeCamp</div>
+      </div>
+      <div class="skill-card">
+        <div class="skill-icon">🔗</div>
+        <div class="skill-name">Git & GitHub</div>
+        <div class="skill-desc">Version control, project repositories, collaborative development workflows</div>
+      </div>
+      <div class="skill-card">
+        <div class="skill-icon">🧪</div>
+        <div class="skill-name">SonarQube</div>
+        <div class="skill-desc">Code quality analysis, bug reporting, software quality engineering</div>
+      </div>
+      <div class="skill-card">
+        <div class="skill-icon">🤖</div>
+        <div class="skill-name">AI & Prolog</div>
+        <div class="skill-desc">Rule-based reasoning, natural language systems, SWI-Prolog chatbot development</div>
+      </div>
+      <div class="skill-card">
+        <div class="skill-icon">⛓️</div>
+        <div class="skill-name">Blockchain</div>
+        <div class="skill-desc">SHA-256 hashing, transaction verification, data integrity with Hashlib</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PROJECTS -->
+<section id="projects">
+  <div class="container">
+    <div class="section-label">What I have built</div>
+    <h2 class="section-title">Projects</h2>
+    <p class="section-sub">Six projects across five different technologies — each one solving a real problem.</p>
+    <div class="projects-grid">
+
+      <div class="project-card">
+        <div>
+          <div class="project-tag">AI · SWI-Prolog</div>
+          <div class="project-name">Airport Smart Kiosk — Natural Language Chatbot</div>
+          <div class="project-desc">An AI-powered chatbot built with SWI-Prolog and rule-based reasoning. Assists passengers with gate information, luggage checks, baggage limits, visa status, and flight updates. Built to handle real passenger queries through natural language.</div>
+          <div class="project-techs">
+            <span class="tech-pill">SWI-Prolog</span>
+            <span class="tech-pill">Rule-Based AI</span>
+            <span class="tech-pill">Natural Language</span>
+          </div>
+        </div>
+        <div class="project-num">01</div>
+      </div>
+
+      <div class="project-card">
+        <div>
+          <div class="project-tag">Blockchain · Python</div>
+          <div class="project-name">TradeChain — Blockchain Transaction System</div>
+          <div class="project-desc">A blockchain-based transaction system with SHA-256 hashing for secure data integrity and timestamps for transaction verification. Built to demonstrate how decentralized systems maintain trust without a central authority.</div>
+          <div class="project-techs">
+            <span class="tech-pill">Python</span>
+            <span class="tech-pill">Blockchain</span>
+            <span class="tech-pill">SHA-256</span>
+            <span class="tech-pill">Hashlib</span>
+          </div>
+        </div>
+        <div class="project-num">02</div>
+      </div>
+
+      <div class="project-card">
+        <div>
+          <div class="project-tag">Java · MVC Architecture</div>
+          <div class="project-name">Student Management System</div>
+          <div class="project-desc">A collaborative two-person project applying Software Design and Architecture principles. Built with the MVC pattern and key design principles: Separation of Concerns, Single Responsibility, Loose Coupling, High Cohesion, and Dependency Inversion.</div>
+          <div class="project-techs">
+            <span class="tech-pill">Java</span>
+            <span class="tech-pill">MVC</span>
+            <span class="tech-pill">OOP</span>
+            <span class="tech-pill">Design Patterns</span>
+          </div>
+        </div>
+        <div class="project-num">03</div>
+      </div>
+
+      <div class="project-card">
+        <div>
+          <div class="project-tag">Python · Testing</div>
+          <div class="project-name">Online Quiz System</div>
+          <div class="project-desc">An interactive quiz platform with user signup, login, quiz attempts, score calculation, and leaderboard rankings. Used JSON for persistent storage and SonarQube for code quality analysis and unit testing.</div>
+          <div class="project-techs">
+            <span class="tech-pill">Python</span>
+            <span class="tech-pill">JSON</span>
+            <span class="tech-pill">SonarQube</span>
+            <span class="tech-pill">Unit Testing</span>
+          </div>
+        </div>
+        <div class="project-num">04</div>
+      </div>
+
+      <div class="project-card">
+        <div>
+          <div class="project-tag">SQL · Database</div>
+          <div class="project-name">Hospital Management System</div>
+          <div class="project-desc">A full hospital management system built in SQL Developer with strong relational database design. Manages patient data, doctor assignments, medicine inventory, and full CRUD operations with proper normalization.</div>
+          <div class="project-techs">
+            <span class="tech-pill">SQL</span>
+            <span class="tech-pill">SQL Developer</span>
+            <span class="tech-pill">Database Design</span>
+            <span class="tech-pill">CRUD</span>
+          </div>
+        </div>
+        <div class="project-num">05</div>
+      </div>
+
+      <div class="project-card">
+        <div>
+          <div class="project-tag">Java · Data Structures</div>
+          <div class="project-name">Inventory Management System</div>
+          <div class="project-desc">An inventory management system built in Java applying core DSA concepts. Used Linked Lists and Stacks to efficiently handle adding, removing, and tracking inventory items with optimized performance.</div>
+          <div class="project-techs">
+            <span class="tech-pill">Java</span>
+            <span class="tech-pill">Linked Lists</span>
+            <span class="tech-pill">Stacks</span>
+            <span class="tech-pill">DSA</span>
+          </div>
+        </div>
+        <div class="project-num">06</div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- EXPERIENCE -->
+<section id="experience" class="internships-bg">
+  <div class="container">
+    <div class="section-label">Work experience</div>
+    <h2 class="section-title">Internships</h2>
+    <p class="section-sub">One internship completed — real work, real projects, real learning.</p>
+    <div class="timeline">
+
+      <div class="timeline-item">
+        <div class="timeline-dot">💻</div>
+        <div>
+          <div class="timeline-company">Oasis Technologies</div>
+          <div class="timeline-role">Web Development Intern</div>
+          <div class="timeline-date">2025 · Remote</div>
+          <div class="timeline-desc">Working on web development projects, applying HTML, CSS and modern web technologies in a real-world environment. Gaining hands-on experience with frontend development workflows and web-based systems.</div>
+        </div>
+      </div>
+
+      <div class="timeline-item">
+        <div class="timeline-dot">☕</div>
+        <div>
+          <div class="timeline-company">Decode Lab</div>
+          <div class="timeline-role">Java Programming Intern</div>
+          <div class="timeline-date">June 2025 – July 2025 · Remote</div>
+          <div class="timeline-desc">Completed three Java development projects applying core software engineering concepts including object-oriented programming, system design, and Java best practices in a professional remote environment.</div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- CERTIFICATIONS -->
+<section id="certifications">
+  <div class="container">
+    <div class="section-label">Credentials</div>
+    <h2 class="section-title">Certifications</h2>
+    <p class="section-sub">Completed programs and participations that show initiative beyond the classroom.</p>
+    <div class="certs-grid">
+      <div class="cert-card">
+        <div class="cert-icon">🤖</div>
+        <div class="cert-name">Five-Day Robotics Summer Camp</div>
+        <div class="cert-date">September 2023</div>
+      </div>
+      <div class="cert-card">
+        <div class="cert-icon">💡</div>
+        <div class="cert-name">15 Digital Courses — Certificate of Completion</div>
+        <div class="cert-date">September 2024</div>
+      </div>
+      <div class="cert-card">
+        <div class="cert-icon">🏆</div>
+        <div class="cert-name">Freelancing Coding Competition</div>
+        <div class="cert-date">February 2025</div>
+      </div>
+      <div class="cert-card">
+        <div class="cert-icon">🌐</div>
+        <div class="cert-name">freeCodeCamp — Responsive Web Design</div>
+        <div class="cert-date">In progress · 2025</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section id="contact" class="contact-bg">
+  <div class="container">
+    <div class="section-label">Let's connect</div>
+    <h2 class="section-title">Open to opportunities</h2>
+    <p class="section-sub">Looking for remote internships in web development, QA engineering, or product roles. Feel free to reach out — I respond to every message.</p>
+    <div class="contact-grid">
+      <a href="mailto:Syednazreabbas5@gmail.com" class="contact-card">
+        <div class="contact-card-icon">📧</div>
+        <div class="contact-card-label">Email</div>
+        <div class="contact-card-value">Syednazreabbas5@gmail.com</div>
+      </a>
+      <a href="https://linkedin.com/in/syed-nazr-e-abbas-1ab433283" target="_blank" class="contact-card">
+        <div class="contact-card-icon">💼</div>
+        <div class="contact-card-label">LinkedIn</div>
+        <div class="contact-card-value">syed-nazr-e-abbas</div>
+      </a>
+      <a href="https://github.com/abbas-swe" target="_blank" class="contact-card">
+        <div class="contact-card-icon">🐙</div>
+        <div class="contact-card-label">GitHub</div>
+        <div class="contact-card-value">github.com/abbas-swe</div>
+      </a>
+      <a href="tel:+923155927616" class="contact-card">
+        <div class="contact-card-icon">📞</div>
+        <div class="contact-card-label">Phone</div>
+        <div class="contact-card-value">+92 315 5927616</div>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- CV STRIP -->
+<div class="cv-strip">
+  <span class="cv-strip-text">Want a full overview? Download my CV for complete details on projects, education and skills.</span>
+  <a href="#" class="cv-strip-btn">Download CV</a>
+</div>
+
+<!-- FOOTER -->
+<footer>
+  <p>Syed Nazr-e-Abbas · BS Software Engineering · COMSATS University Islamabad · 2025</p>
+</footer>
+
+</body>
+</html>
